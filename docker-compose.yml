@@ -2,8 +2,8 @@ version: '2.4'
 
 services:
   app:
-    image: django-geomultiplechoicefield
-    container_name: django-geomultiplechoicefield
+    image: django-geomultiplechoice
+    container_name: django-geomultiplechoice
     restart: always
     build: .
     # Allow container to be attached to, e.g., to access the pdb shell
@@ -25,8 +25,8 @@ services:
     command: python manage.py runserver 0.0.0.0:8000
 
   migration:
-    container_name: django-geomultiplechoicefield-migration
-    image: django-geomultiplechoicefield:latest
+    container_name: django-geomultiplechoice-migration
+    image: django-geomultiplechoice:latest
     depends_on:
       # Declaring this dependency ensures that your application image is built
       # before migrations are run, and that your application and migrations can
@@ -40,7 +40,7 @@ services:
     command: python manage.py migrate
 # {% endif %}
   postgres:
-    container_name: django-geomultiplechoicefield-postgres
+    container_name: django-geomultiplechoice-postgres
     image: mdillon/postgis
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
@@ -52,17 +52,17 @@ services:
       # that allow you to configure the container's behavior, without writing
       # any additional code. Specify the name of your database, and any other
       # variables, here. https://hub.docker.com/_/postgres/#environment-variables
-      - POSTGRES_DB=django-geomultiplechoicefield
+      - POSTGRES_DB=django-geomultiplechoice
       - POSTGRES_PASSWORD=postgres
     volumes:
       # By default, Postgres instantiates an anonymous volume. Use a named
       # one, so your data persists beyond the life of the container. See this
       # post for a discussion of the pitfalls of Postgres and anonymous
       # volumes: https://linuxhint.com/run_postgresql_docker_compose/
-      - django-geomultiplechoicefield-db-data:/var/lib/postgresql/data
+      - django-geomultiplechoice-db-data:/var/lib/postgresql/data
     ports:
       - 32001:5432
 
 volumes:
   # Declare your named volume for Postgres.
-  django-geomultiplechoicefield-db-data:
+  django-geomultiplechoice-db-data:

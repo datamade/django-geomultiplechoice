@@ -4,5 +4,5 @@ from __future__ import unicode_literals
 from django.apps import AppConfig
 
 
-class DjangoGeomultiplechoicefieldConfig(AppConfig):
-    name = 'django_geomultiplechoicefield'
+class DjangoGeomultiplechoiceConfig(AppConfig):
+    name = 'django_geomultiplechoice'

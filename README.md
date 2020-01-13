@@ -1,8 +1,8 @@
-# 🗺 GeoMultipleChoiceField
+# 🗺 GeoMultipleChoice
 
-A Django form field to select multiple geographic areas.
+A Django widget to select multiple geographic areas.
 
-![GeoMultipleChoiceField demo](just-spaces.gif)
+![GeoMultipleChoice demo](just-spaces.gif)
 
 Originally created by [@jeancochrane](https://github.com/jeancochrane). Packaged up by [@beamalsky](https://github.com/beamalsky).
 

@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.postgres.forms import SimpleArrayField
-from django_geomultiplechoicefield.widgets import GeoMultipleChoiceWidget
+from django_geomultiplechoice.widgets import GeoMultipleChoiceWidget
 from example.models import Area, SelectedArea
 
 
