@@ -2,11 +2,26 @@
 
 A Django widget to select multiple geographic areas.
 
-![GeoMultipleChoice demo](just-spaces.gif)
+![GeoMultipleChoice demo](images/just-spaces.gif)
 
 Originally created by [@jeancochrane](https://github.com/jeancochrane). Packaged up by [@beamalsky](https://github.com/beamalsky).
 
-## Example app
+## Local development
+
+This app requires [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/) for local development.
+
+To install and get started, run the following commands in your shell:
+
+```
+# Clone the repo
+git clone git@github.com:datamade/django-geomultiplechoice.git
+
+# Move into the folder
+cd django-geomultiplechoice
+
+# Copy the local_settings example file
+cp example/local_settings.example.py example/local_settings.py
+```
 
 This repo includes an `example` application using geographical data for 2018 Census block groups in Chicago. These data files are under version control, but you can also regenerate them yourself. Run:
 
@@ -14,7 +29,7 @@ This repo includes an `example` application using geographical data for 2018 Cen
 docker-compose run --rm app make -f example/data/Makefile
 ```
 
-To run the app, make sure you have [Docker](https://docs.docker.com/v17.09/engine/installation/) installed and run:
+Then:
 
 ```bash
 docker-compose up --build
@@ -28,7 +43,7 @@ docker-compose run --rm app python manage.py import_data
 
 Visit http://localhost:8000/ and you should see the `example` form running!
 
-![GeoMultipleChoiceWidget example](geomultiplechoicewidget.png)
+![GeoMultipleChoiceWidget example](images/geomultiplechoicewidget.png)
 
 ## Widget options
 
