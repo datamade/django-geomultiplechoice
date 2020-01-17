@@ -6,6 +6,10 @@ A Django widget to select multiple geographic areas.
 
 Originally created by [@jeancochrane](https://github.com/jeancochrane). Packaged up by [@beamalsky](https://github.com/beamalsky).
 
+## Installation
+
+TK
+
 ## Widget options
 
 The `example` project in this repo contains the following sample form implementation:
@@ -62,13 +66,41 @@ class ExampleGeoMultipleChoiceForm(forms.ModelForm):
 
 `SelectedArea` is a model defined in `example/models.py`, and can be adjusted for your needs.
 
-## Importing different Census data
+## Importing Census data
 
-TK
+This repo includes an `example` application using geographical data for 2018 Census block groups in Chicago. Look at `data/Makefile` and `management/commands/import_data.py` to see the ETL pipeline for that data.
+
+If you'd like to use the same pipeline in your project but for a different area:
+
+1. Copy the `data` directory into your project
+2. Update `STATES` in `scripts/states.py`. If the area is in a new state, create a new entry in STATES for that state; otherwise, update the existing state.
+3. Update `all` in `data/Makefile` to match the form `$(DATA_DIR)/final/cb_2018_{state id}_bg_500k.shp` for each state you're importing shapefiles for.
+4. To delete and regenerate the shapefiles, run:
+
+```bash
+cd data && make clean && make
+```
+
+Or if your app is containerized:
+
+```bash
+docker-compose run --rm app make clean -f example/data/Makefile
+docker-compose run --rm app make -f example/data/Makefile
+```
+
+5. Run `python manage.py import_data` to import the new geographical data. Or if your app is containerized, run `docker-compose run --rm app python manage.py import_data`
 
 ## Changing the data structure
 
-TK
+Though the example implementation of this widget uses Census block groups, we've intentionally left the door open to varied geographic data. By default the widget expects each area to have the attributes in `example.models.Area`:
+
+```python
+class Area(models.Model):
+    id = models.CharField(max_length=12, primary_key=True)
+    geom = geo_models.MultiPolygonField(srid=4269)
+```
+
+If that structure doesn't work for you, it can be changed through creating a new widget that inherits from `django_geomultiplechoice.widgets.GeoMultipleChoiceWidget` and modifying `get_features()`.
 
 ## Local development
 
@@ -82,18 +114,15 @@ git clone git@github.com:datamade/django-geomultiplechoice.git
 
 # Move into the folder
 cd django-geomultiplechoice
+```
 
-# Copy the local_settings example file
+Copy the local_settings example file
+
+```bash
 cp example/local_settings.example.py example/local_settings.py
 ```
 
-This repo includes an `example` application using geographical data for 2018 Census block groups in Chicago. These data files are under version control, but you can also regenerate them yourself. Run:
-
-```bash
-docker-compose run --rm app make -f example/data/Makefile
-```
-
-Then:
+Then, build and run the app with Docker:
 
 ```bash
 docker-compose up --build
@@ -115,6 +144,12 @@ To remove data files, run:
 
 ```bash
 docker-compose run --rm app make clean -f example/data/Makefile
+```
+
+To regenerate the Census shapefiles, run:
+
+```bash
+docker-compose run --rm app make -f example/data/Makefile
 ```
 
 To tear down the app and its volumes, run:
