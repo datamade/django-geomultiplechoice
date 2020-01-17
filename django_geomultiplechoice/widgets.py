@@ -30,13 +30,31 @@ class GeoMultipleChoiceWidget(SelectMultiple):
         """
         context = super().get_context(name, value, attrs)
 
-        if self.settings_overrides.get('MAP_ID'):
-            context['MAP_ID'] = self.settings_overrides['MAP_ID']
-        else:
-            context['MAP_ID'] = 'map'
+        MAP_LAYER_STYLE = {
+          'color': '#7a7a7a',
+          'weight': 3,
+          'opacity': 0.5,
+          'fillColor': '#999999',
+          'fillOpacity': 0.3,
+        }
 
-        context['MAP_WIDTH'] = self.settings_overrides.get('MAP_WIDTH')
-        context['MAP_HEIGHT'] = self.settings_overrides.get('MAP_HEIGHT')
+        MAP_LAYER_SELECTED_STYLE = {
+          'color': '#7a7a7a',
+          'weight': 3,
+          'opacity': 0.5,
+          'fillColor': 'black',
+          'fillOpacity': 0.7
+        }
+
+        settings_defaults = [
+            ('MAP_ID', 'map'),
+            ('MAP_LAYER_STYLE', MAP_LAYER_STYLE),
+            ('MAP_LAYER_SELECTED_STYLE', MAP_LAYER_SELECTED_STYLE)
+        ]
+
+        for variable, default in settings_defaults:
+            self.settings_overrides[variable] = \
+                self.settings_overrides.get(variable, default)
 
         context['json'] = json.dumps({
             'type': 'FeatureCollection',

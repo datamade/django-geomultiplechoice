@@ -20,5 +20,3 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-
-SENTRY_DSN = ''

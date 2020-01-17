@@ -22,6 +22,20 @@ class ExampleGeoMultipleChoiceForm(forms.ModelForm):
             'MAP_ID': 'my-example-map', # Defaults to 'map'
             'MAP_HEIGHT': '400px',
             'MAP_WIDTH': '100%',
+            'MAP_LAYER_STYLE': {
+              'color': '#7a7a7a',
+              'weight': 3,
+              'opacity': 0.5,
+              'fillColor': '#999999',
+              'fillOpacity': 0.3,
+            },
+            'MAP_LAYER_SELECTED_STYLE': {
+              'color': '#7a7a7a',
+              'weight': 3,
+              'opacity': 0.5,
+              'fillColor': 'black',
+              'fillOpacity': 0.7
+            }
         }
 
         self.fields['areas'].widget = GeoMultipleChoiceWidget(
