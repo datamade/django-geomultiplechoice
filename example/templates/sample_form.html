@@ -1,0 +1,38 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+<style>
+  body {
+    background-color: #fcf7f1;
+  }
+  label {
+    display: block;
+    margin-top: 0.5rem;
+  }
+  input {
+    display: block;
+    width: 100%;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    margin-top: 0.5rem;
+  }
+</style>
+
+<div class="row justify-content-center">
+  <div class="card col-8 my-4">
+    <h3 class="pt-4">Example GeoMultipleChoice Form</h3>
+    <br />
+    <form method="post" novalidate>
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Submit" class="btn btn-primary float-right mt-3">
+    </form>
+  </div>
+</div>
