@@ -117,13 +117,7 @@ git clone git@github.com:datamade/django-geomultiplechoice.git
 cd django-geomultiplechoice
 ```
 
-Copy the local_settings example file
-
-```bash
-cp example/local_settings.example.py example/local_settings.py
-```
-
-Then, build and run the app with Docker:
+Then build and run the app with Docker:
 
 ```bash
 docker-compose up --build
