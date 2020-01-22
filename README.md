@@ -2,13 +2,28 @@
 
 A Django widget to select multiple geographic areas.
 
-![GeoMultipleChoice demo](images/just-spaces.gif)
+![GeoMultipleChoice demo](https://raw.githubusercontent.com/datamade/django-geomultiplechoice/master/images/just-spaces.gif)
 
 Originally created by [@jeancochrane](https://github.com/jeancochrane). Packaged up by [@beamalsky](https://github.com/beamalsky).
 
-## Installation
+## Quick Start
 
-TK
+This package is available for installation via PyPI. Simply run:
+
+```bash
+pip install django-geomultiplechoice
+```
+
+Add it to `INSTALL_APPS` in your projects `settings.py` file:
+
+INSTALLED_APPS = [
+    ...
+    'django_geomultiplechoice',
+    ...
+]
+
+You should now be ready to start widget setup following the documentation below.
+
 
 ## Widget options
 
@@ -131,7 +146,7 @@ docker-compose run --rm app python manage.py import_data
 
 Visit http://localhost:8000/ and you should see the `example` form running!
 
-![GeoMultipleChoiceWidget example](images/geomultiplechoicewidget.png)
+![GeoMultipleChoiceWidget example](https://raw.githubusercontent.com/datamade/django-geomultiplechoice/master/images/geomultiplechoicewidget.png)
 
 ## Cleaning up
 
