@@ -60,6 +60,7 @@ class ExampleGeoMultipleChoiceForm(forms.ModelForm):
 
 `settings_overrides` accepts all arguments used by `django-leaflet` in its [LEAFLET_CONFIG](https://django-leaflet.readthedocs.io/en/latest/templates.html#configuration), in addition to the following:
 
+- `DEFAULT_ZOOM` and `DEFAULT_CENTER` are required.
 - `MAP_ID` sets the html `id` for your widget map. Useful if you have multiple maps on the page.
 - `MAP_HEIGHT` and `MAP_WIDTH` allow you to size the widget in your form. Must be used together.
 - This example uses the default values for `MAP_LAYER_STYLE` and `MAP_LAYER_STYLING`.

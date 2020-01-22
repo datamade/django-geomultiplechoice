@@ -18,10 +18,8 @@ services:
       postgres:
         condition: service_healthy
     volumes:
-      # Mount the development directory as a volume into the container, so
-      # Docker automatically recognizes your changes.
-      - .:/app # {% if cookiecutter.local_settings != 'None' %}
-      # - ${PWD}/{{cookiecutter.local_settings}}:/app/{{cookiecutter.local_settings|replace(".example", "")}}{% endif %}
+      - .:/app
+      - ${PWD}/example/local_settings.example.py:/app/example/local_settings.py
     command: python manage.py runserver 0.0.0.0:8000
 
   migration:
@@ -35,10 +33,9 @@ services:
       - app
     volumes:
       # These should generally be the same as your application volumes.
-      - .:/app # {% if cookiecutter.local_settings != 'None' %}
-      # - ${PWD}/{{cookiecutter.local_settings}}:/app/{{cookiecutter.local_settings|replace(".example", "")}}{% endif %}
+      - .:/app
+      - ${PWD}/example/local_settings.example.py:/app/example/local_settings.py
     command: python manage.py migrate
-# {% endif %}
   postgres:
     container_name: django-geomultiplechoice-postgres
     image: mdillon/postgis
