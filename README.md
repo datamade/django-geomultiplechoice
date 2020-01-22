@@ -16,11 +16,13 @@ pip install django-geomultiplechoice
 
 Add it to `INSTALL_APPS` in your projects `settings.py` file:
 
+```python
 INSTALLED_APPS = [
     ...
     'django_geomultiplechoice',
     ...
 ]
+```
 
 You should now be ready to start widget setup following the documentation below.
 
