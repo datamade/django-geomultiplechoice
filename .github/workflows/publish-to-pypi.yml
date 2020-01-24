@@ -17,7 +17,7 @@ jobs:
         pip install twine wheel
         pip wheel -w dist --no-deps .
     - name: Publish to Test PyPI
-      if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags') && runner.os != 'Linux'
+      if: github.event_name == 'push' && runner.os != 'Linux'
       env:
         TWINE_USERNAME: '__token__'
         TWINE_PASSWORD: ${{ secrets.test_pypi_password }}
