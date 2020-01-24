@@ -16,11 +16,14 @@ jobs:
       run: |
         pip install twine wheel
         pip wheel -w dist --no-deps .
-    - name: Publish package to Test PyPI
-      uses: pypa/gh-action-pypi-publish@master
-      with:
-        password: ${{ secrets.test_pypi_password }}
-        repository_url: https://test.pypi.org/legacy/
+    - name: Publish to Test PyPI
+      if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags') && runner.os != 'Linux'
+      env:
+        TWINE_USERNAME: '__token__'
+        TWINE_PASSWORD: ${{ secrets.test_pypi_password }}
+      run: |
+        twine upload --skip-existing --repository-url https://test.pypi.org/legacy/ dist/*
+      continue-on-error: true
     - name: Publish package to PyPI
       if: startsWith(github.event.ref, 'refs/tags')
       uses: pypa/gh-action-pypi-publish@master
