@@ -1,8 +1,10 @@
 name: Publish to PyPI and TestPyPI
 
-on: push
-  branches:
-  - master
+on:
+  # Trigger the workflow on push, but only for the master branch
+  push:
+    branches:
+      - master
 
 jobs:
   build-and-publish:
