@@ -23,8 +23,11 @@ jobs:
       run: |
         twine upload --skip-existing --repository-url https://test.pypi.org/legacy/ dist/*
       continue-on-error: true
-    - name: Publish package to PyPI
+    - name: Publish to Test PyPI
       if: startsWith(github.event.ref, 'refs/tags')
-      uses: pypa/gh-action-pypi-publish@master
-      with:
-        password: ${{ secrets.pypi_password }}
+      env:
+        TWINE_USERNAME: '__token__'
+        TWINE_PASSWORD: ${{ secrets.pypi_password }}
+      run: |
+        twine upload --skip-existing dist/*
+      continue-on-error: true
