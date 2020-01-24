@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="django-geomultiplechoice",
-    version="0.0.1",
+    version="0.0.3",
     author="Bea Malsky",
     author_email="beamalsky@datamade.us",
     description="A Django widget to select multiple geographic areas",
