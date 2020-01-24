@@ -13,7 +13,7 @@ jobs:
       with:
         python-version: 3.7
     - name: Build distribution package
-      run:
+      run: |
         pip install twine wheel
         pip wheel -w dist --no-deps .
     - name: Publish package to Test PyPI
