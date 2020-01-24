@@ -23,7 +23,7 @@ jobs:
       run: |
         twine upload --skip-existing --repository-url https://test.pypi.org/legacy/ dist/*
       continue-on-error: true
-    - name: Publish to Test PyPI
+    - name: Publish to PyPI
       if: startsWith(github.event.ref, 'refs/tags')
       env:
         TWINE_USERNAME: '__token__'
