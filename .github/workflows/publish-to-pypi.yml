@@ -1,6 +1,9 @@
 name: Publish to PyPI and TestPyPI
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   build-and-publish:
@@ -17,7 +20,6 @@ jobs:
         pip install twine wheel
         pip wheel -w dist --no-deps .
     - name: Publish to Test PyPI
-      if: github.event.pull_request.merged == true
       env:
         TWINE_USERNAME: '__token__'
         TWINE_PASSWORD: ${{ secrets.test_pypi_password }}
@@ -25,7 +27,7 @@ jobs:
         twine upload --skip-existing --repository-url https://test.pypi.org/legacy/ dist/*
       continue-on-error: true
     - name: Publish to PyPI
-      if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags')
+      if: startsWith(github.event.ref, 'refs/tags')
       env:
         TWINE_USERNAME: '__token__'
         TWINE_PASSWORD: ${{ secrets.pypi_password }}
