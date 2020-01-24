@@ -15,14 +15,12 @@ jobs:
       uses: actions/setup-python@v1
       with:
         python-version: 3.7
-    - name: Build distribution package
-      run: |
-        pip install twine wheel
-        pip wheel -w dist --no-deps .
     - name: Publish to Test PyPI
       env:
         TWINE_USERNAME: '__token__'
         TWINE_PASSWORD: ${{ secrets.test_pypi_password }}
       run: |
+        pip install twine wheel
+        pip wheel -w dist --no-deps .
         twine upload --skip-existing --repository-url https://test.pypi.org/legacy/ dist/*
       continue-on-error: true

@@ -12,15 +12,13 @@ jobs:
       uses: actions/setup-python@v1
       with:
         python-version: 3.7
-    - name: Build distribution package
-      run: |
-        pip install twine wheel
-        pip wheel -w dist --no-deps .
     - name: Publish to PyPI
       if: startsWith(github.event.ref, 'refs/tags')
       env:
         TWINE_USERNAME: '__token__'
         TWINE_PASSWORD: ${{ secrets.pypi_password }}
       run: |
+        pip install twine wheel
+        pip wheel -w dist --no-deps .
         twine upload --skip-existing dist/*
       continue-on-error: true
