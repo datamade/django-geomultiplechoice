@@ -1,2 +1,5 @@
 *.pyc
-local_settings.py
+*.egg-info/
+dist/
+build/
+secrets.py

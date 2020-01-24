@@ -1,0 +1,37 @@
+name: Publish to PyPI and TestPyPI
+
+on:
+  # Trigger the workflow on push, but only for the master branch
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-publish:
+    name: Build to PyPI and TestPyPI
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@master
+    - name: Set up Python 3.7
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.7
+    - name: Build distribution package
+      run: |
+        pip install twine wheel
+        pip wheel -w dist --no-deps .
+    - name: Publish to Test PyPI
+      env:
+        TWINE_USERNAME: '__token__'
+        TWINE_PASSWORD: ${{ secrets.test_pypi_password }}
+      run: |
+        twine upload --skip-existing --repository-url https://test.pypi.org/legacy/ dist/*
+      continue-on-error: true
+    - name: Publish to PyPI
+      if: startsWith(github.event.ref, 'refs/tags')
+      env:
+        TWINE_USERNAME: '__token__'
+        TWINE_PASSWORD: ${{ secrets.pypi_password }}
+      run: |
+        twine upload --skip-existing dist/*
+      continue-on-error: true
