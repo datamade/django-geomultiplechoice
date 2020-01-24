@@ -1,10 +1,13 @@
-name: Publish to PyPI
+name: Publish to Test PyPI
 
-on: push
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   build-and-publish:
-    name: Publish to PyPI
+    name: Publish to Test PyPI
     runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@master
@@ -16,11 +19,10 @@ jobs:
       run: |
         pip install twine wheel
         pip wheel -w dist --no-deps .
-    - name: Publish to PyPI
-      if: startsWith(github.event.ref, 'refs/tags')
+    - name: Publish to Test PyPI
       env:
         TWINE_USERNAME: '__token__'
-        TWINE_PASSWORD: ${{ secrets.pypi_password }}
+        TWINE_PASSWORD: ${{ secrets.test_pypi_password }}
       run: |
-        twine upload --skip-existing dist/*
+        twine upload --skip-existing --repository-url https://test.pypi.org/legacy/ dist/*
       continue-on-error: true
