@@ -5,14 +5,15 @@ with open("README_pypi.md", "r") as fh:
 
 setuptools.setup(
     name="django-geomultiplechoice",
-    version="0.0.4",
+    version="0.0.5",
     author="Bea Malsky",
     author_email="beamalsky@datamade.us",
     description="A Django widget to select multiple geographic areas",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/datamade//django-geomultiplechoice",
-    packages=setuptools.find_packages(include=['django_geomultiplechoice']),
+    packages=['django_geomultiplechoice'],
+    include_package_data=True,
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
