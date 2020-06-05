@@ -1,4 +1,4 @@
-django==3.0.3
+django==3.0.7
 psycopg2==2.8.4
 django-leaflet==0.26.0
 six==1.12.0
